@@ -7,6 +7,6 @@ public class MyFrame extends JFrame
     {
         super(titolo);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(30,30,300,300);
+        setBounds(30,30,400,600);
     }
 }

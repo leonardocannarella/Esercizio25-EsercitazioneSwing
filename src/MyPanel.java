@@ -12,24 +12,32 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
     JCheckBox ck1;
     JTextField text1, text2;
     JRadioButton b1, b2;
+    JList list1;
+    DefaultListModel dlm;
     ButtonGroup grp;
 
     public MyPanel()
     {
+        dlm = new DefaultListModel();
+            dlm.addElement("Napoli");
+            dlm.addElement("Milano");
+            dlm.addElement("Torino");
+        list1 = new JList();
+            list1.setModel(dlm);
         lblInfo = new JLabel("Sfondo bianco.");
-        btnProva = new JButton("Imposta lo sfondo AZZURRO");
-        btnProva2 = new JButton("Imposta lo sfondo ROSSO");
+        btnProva = new JButton("Imposta lo sfondo 1");
+        btnProva2 = new JButton("Imposta lo sfondo 2");
         text1 = new JTextField("Scrivi qui");
         text2 = new JTextField("Non puoi modificarmi.");
-        text2.setEditable(false);
+            text2.setEditable(false);
         ck1 = new JCheckBox("Cambia sfondo");
         b1 = new JRadioButton("Arancione");
         b2 = new JRadioButton("Rosa");
         grp = new ButtonGroup();
-        grp.add(b1);
-        grp.add(b2);
+            grp.add(b1);
+            grp.add(b2);
 
-        setLayout(new GridLayout(8,1));
+        setLayout(new GridLayout(10,1));
         add(lblInfo);
         add(text1);
         add(text2);
@@ -38,6 +46,7 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
         add(ck1);
         add(b1);
         add(b2);
+        add(list1);
 
         btnProva.addActionListener(this);
         btnProva2.addActionListener(this);
@@ -66,13 +75,33 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
 
         if(pulsantePremuto==btnProva)
         {
-            lblInfo.setText("Sfondo impostato su AZZURRO.");
-            setBackground(Color.cyan);
+            if(list1.getSelectedIndex()==0)
+            {
+                text2.setText("Hai selezionato "+list1.getSelectedValue());
+                setBackground(Color.cyan);
+                lblInfo.setText("Sfondo impostato su AZZURRO.");
+            }
+            else if(list1.getSelectedIndex()==1)
+            {
+                text2.setText("Hai selezionato "+list1.getSelectedValue());
+                setBackground(Color.blue);
+                lblInfo.setText("Sfondo impostato su BLU.");
+            }
         }
+
         if(pulsantePremuto==btnProva2)
         {
-            lblInfo.setText("Sfondo impostato su ROSSO.");
-            setBackground(Color.red);
+            if(list1.getSelectedValue()=="Milano")
+            {
+                setBackground(Color.GRAY);
+                lblInfo.setText("Sfondo impostato su GRIGIO.");
+            }
+
+            else if(list1.getSelectedValue()=="Torino")
+            {
+                setBackground(Color.magenta);
+                lblInfo.setText("Sfondo impostato su MAGENTA.");
+            }
         }
         if(pulsantePremuto==b1)
         {
